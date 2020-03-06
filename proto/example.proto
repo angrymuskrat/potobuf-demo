@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package proto;
+
+// definition of rpc server
+service ExampleServer {
+    // description of rpc methods
+    rpc HelloWorld(HelloWorldRequest) returns (HelloWorldReply) {}
+    rpc CheckPoints(CheckPointsRequest) returns (CheckPointsReply) {}
+}
+
+message Point {
+    int32 Id = 1;
+    double X = 2;
+    double Y = 3;
+}
+
+// A, B, C, D
+message Rectangle {
+    Point A = 1;
+    Point C = 2;
+}
+
+// description of request from client
+message HelloWorldRequest {
+    string text = 1;
+}
+
+// description of reply from server
+message HelloWorldReply {
+    string ans = 1;
+}
+
+message CheckPointsRequest {
+    Rectangle rect = 1;
+    repeated Point points = 2;
+}
+
+message CheckPointsReply {
+    map<int32, bool> isInRectangle = 1;
+    string err = 2;
+}
